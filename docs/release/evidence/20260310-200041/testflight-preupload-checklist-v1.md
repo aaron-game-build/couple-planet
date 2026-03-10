@@ -52,12 +52,3 @@
   1. 目标云主机安装 Docker 后完成 `cloud-dev` 拉起验证；
   2. 完成业务回归证据补齐；
   3. 完成签名与上传相关人工步骤。
-
-## 6）自动化补强（2026-03-10）
-
-- 已新增最小 CI：
-  - `.github/workflows/preupload-ci.yml`
-  - 覆盖 API 构建 + iOS dry-run（analyze/test/build-no-codesign）
-- 已新增证据归档脚本：
-  - `scripts/release/archive-preupload-evidence.sh`
-  - 最新归档目录：`docs/release/evidence/20260310-200041`

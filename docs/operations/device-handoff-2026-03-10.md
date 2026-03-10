@@ -39,13 +39,14 @@
   - `flutter build ios --release --no-codesign` PASS
 - cloud-dev 实操记录已生成：
   - `docs/operations/cloud-dev-execution-round-001.md`
+  - `docs/operations/cloud-dev-execution-round-002.md`（PASS）
 
 ## 2）当前阻塞
 
-- 阻塞项：当前执行环境缺少 Docker，导致 `bootstrap-cloud-dev.sh` 无法完成容器拉起。
-- 影响：
-  - cloud-dev 健康验证未完成
-  - TestFlight pre-upload 清单中 cloud-dev 项保持未勾选
+- 阻塞项：无（cloud-dev 已打通）。
+- 当前限制：
+  - 真实 TestFlight 上传仍依赖 macOS + Xcode Organizer + Apple 账号权限。
+  - 移动端人工回归（路由分流/账号切换）需要真机或模拟器执行并补证据。
 
 ## 3）新设备接续步骤（建议按顺序）
 
@@ -94,11 +95,10 @@ curl http://localhost:3000/api/v1/health
 
 ## 4）后续建议（优先级）
 
-1. **P0**：先打通 cloud-dev（Docker 拉起 + 健康检查）。
-2. **P0**：补齐业务回归证据（登录/绑定/聊天/账号切换）。
-3. **P1**：完成真实 TestFlight 上传并记录构建号与发布说明。
-4. **P1**：在 draw.io/Miro 完成一次图源同步并留同步日志。
-5. **P2**：将发布闸口证据采集逐步脚本化，减少人工回填。
+1. **P0**：补齐业务回归证据（登录/绑定/聊天/账号切换）。
+2. **P1**：完成真实 TestFlight 上传并记录构建号与发布说明。
+3. **P1**：在 draw.io/Miro 完成一次图源同步并留同步日志。
+4. **P2**：将发布闸口证据采集逐步脚本化，减少人工回填。
 
 ## 5）建议提交策略（新设备）
 

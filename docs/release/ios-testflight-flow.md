@@ -3,6 +3,9 @@
 
 本文定义 Couple Planet 从实现到 iOS 内测分发的标准路径。
 
+建议配合发布机执行清单：
+- `docs/release/testflight-macos-onepass-checklist.md`
+
 ## 1）前置条件
 
 - Apple Developer 账号有效

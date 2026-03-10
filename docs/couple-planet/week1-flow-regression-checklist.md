@@ -56,7 +56,7 @@ TOKEN_B=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \
 期望：
 - 两次注册与登录均成功，`token` 非空。
 
-### 1.3 邀请码复用检查（未绑定前）
+### 1.3 邀请码刷新检查（未绑定前）
 
 ```bash
 INVITE1=$(curl -s -X POST http://localhost:3000/api/v1/relations/invite-code \
@@ -70,7 +70,8 @@ echo "$INVITE2"
 ```
 
 期望：
-- `INVITE1` 与 `INVITE2` 相同（复用未过期邀请码）。
+- `INVITE1` 与 `INVITE2` 不同（再次调用会刷新为新邀请码）。
+- 使用最新邀请码可继续完成绑定。
 
 ### 1.4 绑定并验证关系
 
@@ -156,3 +157,17 @@ curl -s -X GET http://localhost:3000/api/v1/relations/current \
   - `apps/mobile/lib/features/chat/*`
   - `apps/api/src/modules/relation/*`
   - `apps/api/src/modules/chat/*`
+
+## 5. 执行记录（2026-03-10）
+
+- [x] 1.1 健康检查通过：`status=ok`、`db=up`
+- [x] 1.2 两账号注册/登录成功，token 非空
+- [x] 1.3 邀请码刷新行为验证通过（`INVITE1 != INVITE2`）
+- [x] 1.4 使用最新邀请码绑定成功，双方 `relations/current` 返回 active relation
+- [ ] 1.5 邀请码持久化检查（跨服务重启）待在发布机补测
+- [x] 2.4 Chat 最小链路通过（发送+拉取）
+- [ ] 2.1/2.2/2.3 移动端人工验收项待真机/模拟器补证据
+
+证据来源：
+- `docs/operations/cloud-dev-execution-round-002.md`
+- 本轮 API 实测命令输出（账号注册、绑定、消息拉取）

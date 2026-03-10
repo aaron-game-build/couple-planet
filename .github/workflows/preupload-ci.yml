@@ -1,0 +1,55 @@
+name: Preupload CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  api-guardrails:
+    name: API Guardrails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Enable corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.6.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build API
+        run: pnpm --filter @couple-planet/api build
+
+  ios-dry-run:
+    name: iOS Dry Run
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Run TestFlight dry-run script
+        run: bash scripts/release/testflight-dry-run.sh
+
+      - name: Upload iOS dry-run report (if generated)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testflight-dry-run-report
+          path: docs/release/testflight-dry-run-latest.md
+          if-no-files-found: ignore
