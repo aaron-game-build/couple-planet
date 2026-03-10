@@ -6,6 +6,7 @@ pnpm-lock.yaml
 # Env
 .env
 .env.local
+.env.cloud.dev
 
 # Build artifacts
 dist/
