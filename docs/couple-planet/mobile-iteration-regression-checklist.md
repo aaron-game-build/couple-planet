@@ -38,4 +38,5 @@
 ## Execution Note (2026-03-10)
 
 - Backend core chain regression evidence: `docs/couple-planet/week1-flow-regression-evidence-2026-03-10.md`
+- Mobile manual execution sheet prepared: `docs/couple-planet/mobile-manual-regression-evidence-2026-03-10.md`
 - Mobile manual items remain pending due current environment missing Flutter SDK / simulator.

@@ -63,9 +63,4 @@
   - iOS dry-run: FAIL（`flutter: command not found`，需 CI/macOS 环境）
 - 已新增证据归档脚本：
   - `scripts/release/archive-preupload-evidence.sh`
-  - 最新归档目录：`docs/release/evidence/20260310-212053`
-  - 最新指针：`docs/release/evidence/latest`
-- 已补充记录：
-  - CI 验证：`docs/release/preupload-ci-validation-2026-03-10.md`
-  - 内测通知模板：`docs/release/testflight-beta-notification-2026-03-10.md`
-  - 证据治理：`docs/release/evidence-governance.md`
+  - 最新归档目录：运行归档脚本后回填

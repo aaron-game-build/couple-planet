@@ -21,15 +21,14 @@
 - [ ] `docs/couple-planet/week1-flow-regression-checklist.md` 全项完成
 - [ ] `docs/couple-planet/mobile-iteration-regression-checklist.md` 全项完成
 - [x] 已补充后端主链路证据（`docs/couple-planet/week1-flow-regression-evidence-2026-03-10.md`）
-- [x] 已完成邀请码跨服务重启持久化验证（见同证据文档第 5 节）
 - [ ] 证据已附在 Notion 的 `Release & Regression`
 
 ## iOS 交付
 
-- [x] 构建号已更新（`apps/mobile/pubspec.yaml` -> `0.1.0+2`）
+- [ ] 构建号已更新
 - [ ] Archive 已生成并上传
 - [x] TestFlight 发布说明已准备（`docs/release/testflight-release-notes-draft-v1.md`）
-- [ ] 已通知内测成员并给出重点用例（模板：`docs/release/testflight-beta-notification-2026-03-10.md`）
+- [ ] 已通知内测成员并给出重点用例
 - [ ] 发布机上传执行完成（见 `docs/release/testflight-upload-execution-2026-03-10.md`）
 
 ## 英文分组映射（Section Mapping）

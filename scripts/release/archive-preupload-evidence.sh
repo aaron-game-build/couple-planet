@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TARGET_BASE="${ROOT_DIR}/docs/release/evidence"
 STAMP="$(date '+%Y%m%d-%H%M%S')"
 TARGET_DIR="${TARGET_BASE}/${STAMP}"
+LATEST_DIR="${TARGET_BASE}/latest"
 
 mkdir -p "${TARGET_DIR}"
 
@@ -39,5 +40,17 @@ if command -v curl >/dev/null 2>&1; then
     printf '%s\n' '```'
   } > "${TARGET_DIR}/health-snapshot.md"
 fi
+
+rm -rf "${LATEST_DIR}"
+mkdir -p "${LATEST_DIR}"
+cp -R "${TARGET_DIR}/." "${LATEST_DIR}/"
+
+cat > "${TARGET_BASE}/LATEST.md" <<EOF
+# Latest Evidence Pointer
+
+- Updated At: $(date '+%Y-%m-%d %H:%M:%S %Z')
+- Latest Snapshot: docs/release/evidence/${STAMP}
+- Mirror Directory: docs/release/evidence/latest
+EOF
 
 echo "evidence archived at: ${TARGET_DIR}"

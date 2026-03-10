@@ -3,7 +3,7 @@
 
 - Date: 2026-03-10
 - Target: Couple Planet iOS Internal Testing
-- Build: TBD（待 Xcode Organizer 上传后回填）
+- Build: Candidate `0.1.0+2`（待 Xcode Organizer 上传后回填最终 TestFlight build）
 
 ## 1）主要变化
 
@@ -25,8 +25,8 @@
 
 ## 4）测试账号（待回填）
 
-- Account A: TBD
-- Account B: TBD
+- Account A: `qa_1773148554_c@example.com`（回归临时账号，可替换）
+- Account B: `qa_1773148554_d@example.com`（回归临时账号，可替换）
 
 ## 5）回滚策略
 

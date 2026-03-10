@@ -164,7 +164,7 @@ curl -s -X GET http://localhost:3000/api/v1/relations/current \
 - [x] 1.2 两账号注册/登录成功，token 非空
 - [x] 1.3 邀请码刷新行为验证通过（`INVITE1 != INVITE2`）
 - [x] 1.4 使用最新邀请码绑定成功，双方 `relations/current` 返回 active relation
-- [ ] 1.5 邀请码持久化检查（跨服务重启）待在发布机补测
+- [x] 1.5 邀请码持久化检查（跨服务重启）已通过（见证据文档第 5 节）
 - [x] 2.4 Chat 最小链路通过（发送+拉取）
 - [ ] 2.1/2.2/2.3 移动端人工验收项待真机/模拟器补证据
 

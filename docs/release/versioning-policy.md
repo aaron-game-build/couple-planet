@@ -32,3 +32,9 @@
 - 构建号：Build Number
 - 标签：Tagging
 - 变更日志：Change Log
+
+## 6）当前轮次（2026-03-10）
+
+- App Version：`0.1.0`
+- Candidate Build Number：`2`
+- 说明：已将 `apps/mobile/pubspec.yaml` 更新为 `0.1.0+2`，待 macOS 发布机完成 Archive/Upload 后回填最终 TestFlight build。

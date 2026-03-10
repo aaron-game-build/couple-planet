@@ -9,7 +9,6 @@
   - `docs/operations/cloud-dev-execution-round-002.md`
   - `docs/couple-planet/week1-flow-regression-evidence-2026-03-10.md`
   - `docs/release/testflight-upload-execution-2026-03-10.md`
-  - `docs/release/preupload-ci-validation-2026-03-10.md`
 
 ## 1）检查结果
 

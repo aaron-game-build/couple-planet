@@ -4,7 +4,6 @@
 - Date: 2026-03-10
 - Executor: openclaw session
 - Target: `apps/mobile` iOS TestFlight upload
-- Candidate Build: `0.1.0+2`
 
 ## 1）执行尝试
 
