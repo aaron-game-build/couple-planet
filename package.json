@@ -1,0 +1,14 @@
+{
+  "name": "couple-planet",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.6.0",
+  "scripts": {
+    "dev:api": "pnpm --filter @couple-planet/api dev",
+    "build:api": "pnpm --filter @couple-planet/api build",
+    "lint:api": "pnpm --filter @couple-planet/api lint",
+    "test:api": "pnpm --filter @couple-planet/api test",
+    "dev:mobile": "cd apps/mobile && flutter run",
+    "analyze:mobile": "cd apps/mobile && flutter analyze"
+  }
+}

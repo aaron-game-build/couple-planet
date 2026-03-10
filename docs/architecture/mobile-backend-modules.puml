@@ -1,0 +1,47 @@
+@startuml
+package "移动端（Flutter）" {
+  class ApiClient
+  class LoginPage
+  class BindPage
+  class ChatListPage
+  class ChatPage
+  class AccountStore
+  class AppStrings
+}
+
+package "后端 API（NestJS）" {
+  class AuthController
+  class RelationController
+  class ChatController
+  class AuthService
+  class RelationService
+  class ChatService
+  class DbService
+}
+
+database PostgreSQL
+
+LoginPage --> ApiClient
+BindPage --> ApiClient
+ChatListPage --> ApiClient
+ChatPage --> ApiClient
+ApiClient --> AuthController
+ApiClient --> RelationController
+ApiClient --> ChatController
+
+AuthController --> AuthService
+RelationController --> RelationService
+ChatController --> ChatService
+
+AuthService --> DbService
+RelationService --> DbService
+ChatService --> DbService
+DbService --> PostgreSQL
+
+LoginPage --> AccountStore
+ChatListPage --> AccountStore
+LoginPage --> AppStrings
+BindPage --> AppStrings
+ChatListPage --> AppStrings
+ChatPage --> AppStrings
+@enduml

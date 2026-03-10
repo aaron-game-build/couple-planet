@@ -1,0 +1,22 @@
+flowchart TD
+  user[用户]
+  mobile[Flutter 移动端]
+  api[Nest API]
+  db[PostgreSQL 数据库]
+  tc[腾讯云 Lighthouse + Docker]
+  figma[Figma]
+  notion[Notion]
+  testflight[TestFlight]
+  appstore[App Store Connect]
+
+  user --> mobile
+  mobile -->|"REST API 调用"| api
+  api --> db
+  api --> tc
+  mobile --> testflight
+  testflight --> appstore
+
+  notion -->|"PRD / 任务 / 决策"| mobile
+  notion -->|"PRD / 任务 / 决策"| api
+  figma -->|"最终 UI 规范"| mobile
+  notion -->|"架构评审输入"| figma
