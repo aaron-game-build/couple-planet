@@ -407,3 +407,84 @@
 - 周一：补齐本周 PRD 与 Design Tasks
 - 周三：清理 `Blocked / 阻塞` 与无主任务
 - 周五：更新 `Release & Regression` 并沉淀证据链接
+
+## 11）跨工具字段映射（Couple Planet 执行版）
+
+目标：把 Notion 真正作为“跨工具中枢”，可追溯 Stitch -> Figma -> 架构图 -> 实现 -> 回归。
+
+### 11.1 PRD / Requirements 必增字段
+
+- `Stitch Options Link / Stitch 候选链接`：URL
+- `Figma Frame URL / Figma 页面链接`：URL
+- `Figma Frame ID / Figma 页面ID`：Text
+- `Architecture Decision Link / 架构决策链接`：Relation -> `Architecture Decisions`
+- `Architecture Diagram Path / 架构图路径`：Text（示例：`docs/architecture/system-context.mmd`）
+- `Input Package Ready / 输入包完整`：Checkbox
+
+### 11.2 Dev Tasks 必增字段
+
+- `Requirement Link / 需求链接`：Relation -> `PRD / Requirements`
+- `API Contract Link / API 契约链接`：URL 或 Relation（按你的库结构二选一）
+- `Architecture Diagram Path / 架构图路径`：Text
+- `Acceptance Checklist / 验收清单`：Text
+- `Regression Evidence Link / 回归证据链接`：Relation -> `Release & Regression` 或 URL
+- `Gate Result / 门禁结果`：Select（`Ready`、`Blocked`）
+
+### 11.3 Release & Regression 必增字段
+
+- `Build Version / 构建版本`：Text（示例：`0.2.0(45)`）
+- `Go No-Go / 发布结论`：Select（`Go`、`No-Go`）
+- `P0 P1 Summary / 缺陷摘要`：Text
+- `Evidence Bundle / 证据包`：URL（可放飞书/Notion子页/仓库证据文档）
+- `Linked Dev Tasks / 关联研发任务`：Relation -> `Dev Tasks`
+
+### 11.4 需求卡的最小六链（必须都能点击）
+
+每条准备进入开发的需求，至少能追溯这六个链接：
+
+1. `Stitch Options Link / Stitch 候选链接`
+2. `Figma Frame URL / Figma 页面链接`
+3. `Architecture Decision Link / 架构决策链接`
+4. `Architecture Diagram Path / 架构图路径`
+5. `Requirement Link / 需求链接`（在 Dev Task 侧回链）
+6. `Regression Evidence Link / 回归证据链接`
+
+## 12）门禁视图（开箱即用）
+
+### 12.1 PRD Gate - Design Pending
+
+- 来源：`PRD / Requirements`
+- 过滤：
+  - `Input Package Ready / 输入包完整` is unchecked
+  - OR `Figma Frame URL / Figma 页面链接` is empty
+  - OR `Architecture Diagram Path / 架构图路径` is empty
+- 用途：禁止未冻结输入直接进开发。
+
+### 12.2 Dev Gate - Ready To Build
+
+- 来源：`Dev Tasks`
+- 过滤：
+  - `Gate Result / 门禁结果` is `Ready`
+  - AND `Requirement Link / 需求链接` is not empty
+  - AND `Acceptance Checklist / 验收清单` is not empty
+- 用途：仅允许门禁通过任务进入实现。
+
+### 12.3 Release Gate - Missing Evidence
+
+- 来源：`Release & Regression`
+- 过滤：
+  - `Go No-Go / 发布结论` is `Go`
+  - AND `Evidence Bundle / 证据包` is empty
+- 用途：避免“口头 Go”但证据缺失。
+
+## 13）单需求链路检查（每周五执行）
+
+对本周 Top 3 需求逐条检查：
+
+- [ ] 在 `PRD / Requirements` 能看到 Stitch 与 Figma 链接
+- [ ] 在 `Architecture Decisions` 能看到对应决策与图源路径
+- [ ] 在 `Dev Tasks` 能看到验收清单与门禁结果
+- [ ] 在 `Release & Regression` 能看到 Go/No-Go 与证据包
+- [ ] 任意 Dev Task 都能反向找到 Requirement 与 Release
+
+若有任一项失败，该需求标记 `Blocked / 阻塞`，不得进入下一阶段。
