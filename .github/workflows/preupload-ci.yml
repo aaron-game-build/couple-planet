@@ -79,9 +79,59 @@ jobs:
           persist-credentials: false
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          channel: stable
+        shell: bash
+        env:
+          FLUTTER_RELEASES_URL: https://storage.googleapis.com/flutter_infra_release/releases/releases_macos.json
+        run: |
+          set -euo pipefail
+          releases_json="$RUNNER_TEMP/flutter-releases-macos.json"
+          flutter_zip="$RUNNER_TEMP/flutter-sdk.zip"
+          flutter_root="$RUNNER_TEMP/flutter-sdk"
+
+          curl --fail --location --silent --show-error \
+            "$FLUTTER_RELEASES_URL" \
+            --output "$releases_json"
+
+          read -r flutter_archive flutter_sha256 < <(
+            python3 - "$releases_json" "${RUNNER_ARCH:-X64}" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          releases = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          stable_hash = releases["current_release"]["stable"]
+          candidates = [
+              release
+              for release in releases["releases"]
+              if release.get("hash") == stable_hash
+          ]
+          wants_arm64 = sys.argv[2].upper() == "ARM64"
+          selected = next(
+              (
+                  release
+                  for release in candidates
+                  if ("arm64" in release["archive"].lower()) == wants_arm64
+              ),
+              None,
+          )
+          if selected is None:
+              raise SystemExit(
+                  f"No stable Flutter archive for runner architecture {sys.argv[2]}"
+              )
+          print(selected["archive"], selected["sha256"])
+          PY
+          )
+
+          base_url="${FLUTTER_RELEASES_URL%/releases_macos.json}"
+          curl --fail --location --silent --show-error \
+            "$base_url/$flutter_archive" \
+            --output "$flutter_zip"
+          printf '%s  %s\n' "$flutter_sha256" "$flutter_zip" | shasum -a 256 --check
+
+          mkdir -p "$flutter_root"
+          ditto -x -k "$flutter_zip" "$flutter_root"
+          echo "$flutter_root/flutter/bin" >> "$GITHUB_PATH"
+          "$flutter_root/flutter/bin/flutter" --version
 
       - name: Run TestFlight dry-run script
         run: bash scripts/release/testflight-dry-run.sh
