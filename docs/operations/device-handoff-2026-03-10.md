@@ -8,7 +8,7 @@
 ### 代码与仓库
 
 - 代码仓库已初始化并推送到远端：
-  - `git@github.com:aaron-game-build/couple-planet.git`
+- `git@github.com:aaron-personal-os/couple-planet.git`
 - 当前主分支：`main`
 - 关键执行化成果已入库（云上、发布、工作流文档与脚本）。
 
@@ -63,7 +63,7 @@
 ### Step B：拉取与依赖
 
 ```bash
-git clone git@github.com:aaron-game-build/couple-planet.git
+git clone git@github.com:aaron-personal-os/couple-planet.git
 cd couple-planet/@couple-planet
 corepack enable
 corepack prepare pnpm@10.6.0 --activate
